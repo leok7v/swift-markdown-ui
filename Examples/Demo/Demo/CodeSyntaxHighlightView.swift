@@ -98,6 +98,25 @@ struct CodeSyntaxHighlightView: View {
     }
   }
 
+  private struct CopyButton: View {
+    let text: String
+    let copy: (String) -> Void
+    @State private var copied = false
+    @State private var stamp = 0
+    var body: some View {
+      Image(systemName: copied ? "checkmark" : "clipboard") // or "doc.on.doc"
+        .onTapGesture {
+          copy(text)
+          copied = true
+          stamp &+= 1
+          let cur = stamp
+          DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            if cur == stamp { copied = false }
+          }
+        }
+    }
+  }
+
   @ViewBuilder
   private func codeBlock(_ configuration: CodeBlockConfiguration) -> some View {
     VStack(spacing: 0) {
@@ -108,7 +127,7 @@ struct CodeSyntaxHighlightView: View {
           .foregroundColor(Color(theme.plainTextColor))
         Spacer()
 
-        Image(systemName: "clipboard")
+        CopyButton(text: configuration.content, copy: copyToClipboard)
           .onTapGesture {
             copyToClipboard(configuration.content)
           }
