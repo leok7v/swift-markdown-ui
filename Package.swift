@@ -18,9 +18,9 @@ let package = Package(
     )
   ],
   dependencies: [
-    .package(url: "https://github.com/gonzalezreal/NetworkImage", from: "6.0.0"),
-    .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.10.0"),
-    .package(url: "https://github.com/swiftlang/swift-cmark", from: "0.4.0"),
+    .package(url: "https://github.com/leok7v/NetworkImage", from: "6.0.0"),
+    .package(url: "https://github.com/leok7v/swift-snapshot-testing", from: "1.10.0"),
+    .package(url: "https://github.com/leok7v/swift-cmark", from: "0.4.0"),
   ],
   targets: [
     .target(
